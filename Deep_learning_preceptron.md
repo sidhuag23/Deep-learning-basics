@@ -203,63 +203,37 @@ for x1 , x2 in inputs:
 
 ```python
 def step(z):
-    return 1 if z >= 0 else 1
+    return 1 if z >= 0 else 0
 
 
-def hidden_layer_1(x1, x2):
-    w1, w2 = -1, -1
-    b = 0.5
-    return step(w1 * x1 + w2 * x2 + b)
+def hidden1(x1, x2):   # OR
+    return step(x1 + x2 - 0.5)
 
 
-def hidden_layer_2(x1, x2):
-    w1, w2 = -1, -1
-    b = 0.5
-    return step(w1 * x1 + w2 * x2 + b)
+def hidden2(x1, x2):   # NAND
+    return step(-x1 - x2 + 1.5)
 
 
-def hidden_layer_3(x1, x2):
-    w1, w2 = -1, -1
-    b = 0.5
-    return step(w1 * x1 + w2 * x2 + b)
-
-
-def hidden_layer_4(x1, x2):
-    w1, w2 = -1, -1
-    b = 0.5
-    return step(w1 * x1 + w2 * x2 + b)
-
-
-def output_neuron(h1, h2, h3, h4):
-    w1, w2, w3, w4 = -1, 1, 1, -1
-    b = -0.5
-    z = w1 * h1 + w2 * h2 + w3 * h3 + w4 * h4 + b
-    return step(z)
+def output(h1, h2):    # AND
+    return step(h1 + h2 - 1.5)
 
 
 def xor_mlp(x1, x2):
-    o1 = hidden_layer_1(x1, x2)
-    o2 = hidden_layer_2(x1, x2)
-    o3 = hidden_layer_3(x1, x2)
-    o4 = hidden_layer_4(x1, x2)
-
-    return output_neuron(o1, o2, o3, o4)
+    h1 = hidden1(x1, x2)
+    h2 = hidden2(x1, x2)
+    return output(h1, h2)
 
 
 if __name__ == "__main__":
-    inputs = [(0, 0), (0, 1), (1, 0), (1, 1)]
-
-    print("x1 x2 | output")
-    for x1, x2 in inputs:
-        print(x1, x2, "|", xor_mlp(x1, x2))
-
+    for x1, x2 in [(0,0),(0,1),(1,0),(1,1)]:
+        print(x1, x2, "→", xor_mlp(x1, x2))
 ```
 
     x1 x2 | output
-    0 0 | 1
-    0 1 | 1
-    1 0 | 1
-    1 1 | 1
+  0 0 → 0
+  0 1 → 1
+  1 0 → 1
+  1 1 → 0
     
 
 
