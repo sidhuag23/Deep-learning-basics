@@ -251,15 +251,12 @@ if __name__ == "__main__":
 
 
 ```
+```python
 
     x1 x2 | output
   0 0 → 0
   0 1 → 1
   1 0 → 1
   1 1 → 0
-    
-
-
-```python
 
 ```
